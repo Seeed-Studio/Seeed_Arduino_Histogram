@@ -13,20 +13,30 @@ void setup(void) {
   tft.init();                 
    
   histogram.Histogram_init(&tft);                                 //Initialize histogram 
-  histogram.Histogram_form("one",5,2000,40,TFT_RED);             //Input lable,NO,value(high),width,colour
-  histogram.Histogram_form("two",5,5000,40,TFT_RED);
-  histogram.Histogram_form("three",1,8541,50,TFT_RED);
-  histogram.Histogram_form("four",5,1550,50,TFT_RED);
-  histogram.Histogram_form("five",5,5000,30,TFT_RED);
-
+  histogram.Histogram_form("a",1,50,40,TFT_RED);             //Input lable,NO,value(high),width,colour
+  histogram.Histogram_form("b",2,60,40,TFT_RED);
+  histogram.Histogram_form("c",3,10,50,TFT_RED);
+  histogram.Histogram_form("d",4,53,50,TFT_RED);
+  histogram.Histogram_form("e",5,33,30,TFT_RED);
+  
+  histogram.Histogram_show(); 
+  delay(5000);
+  histogram.notShowCylindricity(1);
+  histogram.Histogram_show(); 
+  delay(5000);
 }
 
 void loop() {
- histogram.Histogram_show();                             
+    histogram.Histogram_show(); 
+  delay(3000);
+
+  histogram.HistogramShrinkShow(130,180,2);
   delay(3000);
   showSeeeder();
   delay(3000);
   histogram.setTextSizeColourHistogram(1,2,TFT_BLACK,TFT_GREEN);
+  delay(3000);
+  histogram.HistogramShrinkShow(50,60,3);
   delay(3000);
 }
 
