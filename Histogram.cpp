@@ -87,7 +87,7 @@ void TFT_Histogram::histogramShow()
 
   while(h!=NULL)
   {
-    if(NotShow!=0){NotShow=0;h=h->next; continue;}
+    if(NotShow==h->NO){NotShow=0;h=h->next; continue;}
     high=h->value*180/Histogram_max;                                 //Calculate the ratio of height value
 
     if(number>=4)
@@ -172,7 +172,7 @@ void TFT_Histogram::setTextSizeColourHistogram(int lableSize,int valueSize,int t
   
   while(h!=NULL)
   {
-    if(NotShow!=0){NotShow=0;h=h->next; continue;}
+    if(NotShow==h->NO){NotShow=0;h=h->next; continue;}
     high=h->value*180/Histogram_max;                                 //Calculate the ratio of height value
 
     if(number>=4)
@@ -234,7 +234,7 @@ void TFT_Histogram::histogramShrinkShow(int x,int y,int shrinkMultiple)
 
   while(h!=NULL)
   {
-    if(NotShow!=0){NotShow=0;h=h->next; continue;}
+    if(NotShow==h->NO){NotShow=0;h=h->next; continue;}
     high=h->value*180/Histogram_max/shrinkMultiple;                                 //Calculate the ratio of height value
 
     if(number>=4)
@@ -302,7 +302,7 @@ void TFT_Histogram::notShowAxis()
 
   while(h!=NULL)
   {
-    if(NotShow!=0){NotShow=0;h=h->next; continue;}
+    if(NotShow==h->NO){NotShow=0;h=h->next; continue;}
     high=h->value*180/Histogram_max;                                 //Calculate the ratio of height value
 
     if(number>=4)
@@ -348,7 +348,7 @@ void TFT_Histogram::notShowtext(int NO)
 
   while(h!=NULL)
   {
-    if(NotShow!=0){NotShow=0;h=h->next; continue;}
+    if(NotShow==h->NO){NotShow=0;h=h->next; continue;}
     high=h->value*180/Histogram_max;                                 //Calculate the ratio of height value
 
     if(number>=4)
@@ -409,7 +409,7 @@ void TFT_Histogram::groupCylinder(int Cylinder_Number)
 
   while(h!=NULL)
   {
-    if(NotShow!=0){NotShow=0;h=h->next; continue;}
+    if(NotShow==h->NO){NotShow=0;h=h->next; continue;}
     for(int i=1;i<=Cylinder_Number;i++)
     {
       high=h->value*180/Histogram_max;                                 //Calculate the ratio of height value  
@@ -460,7 +460,7 @@ void TFT_Histogram::lineChat(int colour)
   int x=20,y=20;
   while(h!=NULL)
   {
-    if(NotShow!=0){NotShow=0;h=h->next; continue;}
+    if(NotShow==h->NO){NotShow=0;h=h->next; continue;}
     high=h->value*180/Histogram_max;                                 //Calculate the ratio of height value
 
     if(number>=4)
@@ -510,7 +510,7 @@ void TFT_Histogram::lineChat(int Cylinder_Number,int colour)
 
   while(h!=NULL)
   {
-    if(NotShow!=0){NotShow=0;h=h->next; continue;}
+    if(NotShow==h->NO){NotShow=0;h=h->next; continue;}
     for(int i=1;i<=Cylinder_Number;i++)
     {
       high=h->value*180/Histogram_max;                                 //Calculate the ratio of height value  
