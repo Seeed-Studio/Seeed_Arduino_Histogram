@@ -37,7 +37,7 @@ class TFT_Histogram
        TFT_eSPI* tft_Histogram; 
        int NotShow=0;                                                       //this value is let a cylinder not showing on screen 
        void compare();                                                     //to abtain the maximum value and  and minimum value
-       int number=1;                                                      //record these number of cylindricity
+       int number=1;                                                      //record amount of cylindricity
        double Histogram_max,Histogram_min;                               //It is a value of high that Histogram_max is to record the maximum value and Histogram_min is to record the minimum value
        int Histogram_sum_wide;                                          //Histogram_sum_wide is record the width of the sum of all cylindricitys
        double Histogram_width=30;                                      //Histogram_width is record the length of the sum of all cylindricitys                                 

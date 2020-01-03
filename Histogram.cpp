@@ -34,6 +34,7 @@ void TFT_Histogram::histogramInit(TFT_eSPI* tft)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void TFT_Histogram::histogramForm(String lable,int NO,double Histogram_value,int Histogram_WIDTH,uint32_t  colour)
 { 
+  if(number>8) return;
   struct Histogram_param *p;
   p=(struct Histogram_param *)malloc(sizeof(struct Histogram_param ));
   p->NO=NO;
