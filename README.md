@@ -2,8 +2,7 @@ Seeed_Arduino_HISTOGRAM
 ============================================================
 Introduction
 ------------------------------------------------------------
-    An Arduino library for display multi - function histogram on screen.
-<br> 
+    An Arduino library for display multi - function histogram on screen.<br> 
 Usage
 ------------------------------------------------------------
     1.Git clone this repository to your Arduino IDE's libraries directory.<br>
