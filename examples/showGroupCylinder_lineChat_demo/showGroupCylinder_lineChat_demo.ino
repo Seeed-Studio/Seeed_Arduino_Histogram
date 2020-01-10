@@ -21,23 +21,23 @@ void loop() {
   delay(2000); 
   histogram.groupCylinder(1);                                     //The function is to group these cylinders.
   delay(2000);
-  histogram.lineChat(1,TFT_BLACK);                            // The function is to show a line chart. 
+  histogram.lineChart(1,TFT_BLACK);                               // The function is to show a line chart. 
   delay(2000);
   histogram.groupCylinder(2);                                     //The function is to group these cylinders.
   delay(2000);
-  histogram.lineChat(2,TFT_BLACK);
+  histogram.lineChart(2,TFT_BLACK);
   delay(2000);
   histogram.groupCylinder(3);                                     //The function is to group these cylinders.
   delay(2000);
-  histogram.lineChat(3,TFT_BLACK);
+  histogram.lineChart(3,TFT_BLACK);
   delay(2000);
   histogram.groupCylinder(4);                                     //The function is to group these cylinders.
   delay(2000);
-  histogram.lineChat(4,TFT_BLACK);
+  histogram.lineChart(4,TFT_BLACK);
   delay(2000);
   histogram.groupCylinder(5);                                     //The function is to group these cylinders.
   delay(2000);
-  histogram.lineChat(5,TFT_BLACK);
+  histogram.lineChart(5,TFT_BLACK);
   delay(2000);
 
 }

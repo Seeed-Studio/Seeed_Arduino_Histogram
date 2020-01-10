@@ -103,18 +103,18 @@ void TFT_Histogram::histogramShow()
     if(high<2) high=2;
     if(width_P<8) width_P=8;
     
-    tft_Histogram->drawRect(20,Histogram_width,high,width_P, h->colour);//打印柱形
-    tft_Histogram->fillRect(20,Histogram_width,high,width_P, h->colour);//填充颜色
+    tft_Histogram->drawRect(20,Histogram_width,high,width_P, h->colour);//show cylinder
+    tft_Histogram->fillRect(20,Histogram_width,high,width_P, h->colour);//fill color
 
-    tft_Histogram->setRotation(3);                                       //设置文字或数字打印参考原点
+    tft_Histogram->setRotation(3);                                       //Set text size and digital print reference origin
     tft_Histogram->setTextSize(1);
-//  tft_Histogram->drawNumber(h->value,Histogram_width, 240-high-30);    //显示值（高度）
+//  tft_Histogram->drawNumber(h->value,Histogram_width, 240-high-30);    //Show high(value) of cylinder 
     tft_Histogram->drawFloat(h->value,1 ,Histogram_width, 240-high-30);
-    tft_Histogram->drawString(h->lable,Histogram_width,222);             //文本字符串
-    tft_Histogram->setRotation(2);                                       //还原参考原点
+    tft_Histogram->drawString(h->lable,Histogram_width,222);             //Show Text string
+    tft_Histogram->setRotation(2);                                       //Reset reference origin
 
     
-    Histogram_width=Histogram_width+width_P+10;                  //记录总宽度
+    Histogram_width=Histogram_width+width_P+10;                  //Record total width
     h=h->next;
   }
 
@@ -141,10 +141,10 @@ void TFT_Histogram::histogramShow()
     if(high<2) high=2;
     if(width_P<1) width_P=1;
     
-    tft_Histogram->drawRect(20,Histogram_width,high,width_P, h->colour);//打印柱形
-    tft_Histogram->fillRect(20,Histogram_width,high,width_P, h->colour);//填充颜色
+    tft_Histogram->drawRect(20,Histogram_width,high,width_P, h->colour);//show cylinder
+    tft_Histogram->fillRect(20,Histogram_width,high,width_P, h->colour);//fill color
     
-    Histogram_width=Histogram_width+width_P+1;                  //记录总宽度
+    Histogram_width=Histogram_width+width_P+1;                  //Record total width
     h=h->next;
   }
 
@@ -187,23 +187,23 @@ void TFT_Histogram::setTextSizeColourHistogram(int lableSize,int valueSize,int t
     if(Histogram_width>300-width_P) break;
     if(high<2) high=2;
     if(width_P<8) width_P=8;
-    tft_Histogram->drawRect(20,Histogram_width,high,width_P, h->colour);//打印柱形
-    tft_Histogram->fillRect(20,Histogram_width,high,width_P, h->colour);//填充颜色
+    tft_Histogram->drawRect(20,Histogram_width,high,width_P, h->colour);//show cylinder
+    tft_Histogram->fillRect(20,Histogram_width,high,width_P, h->colour);//fill color
 
     if(lableSize>=4||lableSize<0) lableSize=1;
     if(valueSize>=4||valueSize<0) valueSize=1;
-    tft_Histogram->setRotation(3);                                       //设置文字或数字打印参考原点   
+    tft_Histogram->setRotation(3);                                       //Set text size and digital print reference origin   
     tft_Histogram->setTextSize(valueSize);
     tft_Histogram->setTextColor(textColour, textBackgroundColour);
-//  tft_Histogram->drawNumber(h->value,Histogram_width, 240-high-40);    //显示值（高度）
+//  tft_Histogram->drawNumber(h->value,Histogram_width, 240-high-40);    //Show high(value) of cylinder 
     tft_Histogram->drawFloat(h->value,1 ,Histogram_width, 240-high-40);
 
     tft_Histogram->setTextSize(lableSize);
-    tft_Histogram->drawString(h->lable,Histogram_width,222);             //文本字符串
-    tft_Histogram->setRotation(2);                                       //还原参考原点
+    tft_Histogram->drawString(h->lable,Histogram_width,222);             //Show Text string
+    tft_Histogram->setRotation(2);                                       //Reset reference origin
 
     
-    Histogram_width=Histogram_width+width_P+10;                  //记录总宽度
+    Histogram_width=Histogram_width+width_P+10;                  //Record total width
     h=h->next;
   }
   width_P=0;
@@ -250,17 +250,17 @@ void TFT_Histogram::histogramShrinkShow(int x,int y,int shrinkMultiple)
     if(high<2) high=2;
     if(width_P<1) width_P=1;
     
-    tft_Histogram->drawRect(x,Histogram_width,high,width_P, h->colour);//打印柱形
-    tft_Histogram->fillRect(x,Histogram_width,high,width_P, h->colour);//填充颜色
+    tft_Histogram->drawRect(x,Histogram_width,high,width_P, h->colour);//show cylinder
+    tft_Histogram->fillRect(x,Histogram_width,high,width_P, h->colour);//fill color
 
-    tft_Histogram->setRotation(3);                                       //设置文字或数字打印参考原点
+    tft_Histogram->setRotation(3);                                       //Set text size and digital print reference origin
     tft_Histogram->setTextSize(0);
-//  tft_Histogram->drawNumber(h->value,Histogram_width, 240-high-x-8);    //显示值（高度）
+//  tft_Histogram->drawNumber(h->value,Histogram_width, 240-high-x-8);    //Show high(value) of cylinder 
     tft_Histogram->drawFloat(h->value,1 ,Histogram_width, 240-high-x-8);
-    tft_Histogram->drawString(h->lable,Histogram_width,240-x);             //文本字符串
-    tft_Histogram->setRotation(2);                                       //还原参考原点
+    tft_Histogram->drawString(h->lable,Histogram_width,240-x);             //Show Text string
+    tft_Histogram->setRotation(2);                                       //Reset reference origin
     
-    Histogram_width=Histogram_width+width_P+2;                  //记录总宽度
+    Histogram_width=Histogram_width+width_P+2;                  //Record total width
     h=h->next;
   }
 }
@@ -318,18 +318,18 @@ void TFT_Histogram::notShowAxis()
     if(high<2) high=2;
     if(width_P<8) width_P=8;
     
-    tft_Histogram->drawRect(20,Histogram_width,high,width_P, h->colour);//打印柱形
-    tft_Histogram->fillRect(20,Histogram_width,high,width_P, h->colour);//填充颜色
+    tft_Histogram->drawRect(20,Histogram_width,high,width_P, h->colour);//show cylinder
+    tft_Histogram->fillRect(20,Histogram_width,high,width_P, h->colour);//fill color
 
-    tft_Histogram->setRotation(3);                                       //设置文字或数字打印参考原点
+    tft_Histogram->setRotation(3);                                       //Set text size and digital print reference origin
     tft_Histogram->setTextSize(1);
-//  tft_Histogram->drawNumber(h->value,Histogram_width, 240-high-30);    //显示值（高度）
+//  tft_Histogram->drawNumber(h->value,Histogram_width, 240-high-30);    //Show high(value) of cylinder 
     tft_Histogram->drawFloat(h->value,1 ,Histogram_width, 240-high-30);
-    tft_Histogram->drawString(h->lable,Histogram_width,222);             //文本字符串
-    tft_Histogram->setRotation(2);                                       //还原参考原点
+    tft_Histogram->drawString(h->lable,Histogram_width,222);             //Show Text string
+    tft_Histogram->setRotation(2);                                       //Reset reference origin
 
     
-    Histogram_width=Histogram_width+width_P+10;                  //记录总宽度
+    Histogram_width=Histogram_width+width_P+10;                  //Record total width
     h=h->next;
   }
 }
@@ -364,18 +364,18 @@ void TFT_Histogram::notShowtext(int NO)
     if(high<2) high=2;
     if(width_P<8) width_P=8;
    
-    tft_Histogram->drawRect(20,Histogram_width,high,width_P, h->colour);//打印柱形
-    tft_Histogram->fillRect(20,Histogram_width,high,width_P, h->colour);//填充颜色
+    tft_Histogram->drawRect(20,Histogram_width,high,width_P, h->colour);//show cylinder
+    tft_Histogram->fillRect(20,Histogram_width,high,width_P, h->colour);//fill color
     if(h->NO==NO){ Histogram_width=Histogram_width+width_P+10; h=h->next;continue; }
-    tft_Histogram->setRotation(3);                                       //设置文字或数字打印参考原点
+    tft_Histogram->setRotation(3);                                       //Set text size and digital print reference origin
     tft_Histogram->setTextSize(1);
-//    tft_Histogram->drawNumber(h->value,Histogram_width, 240-high-30);    //显示值（高度）
+//    tft_Histogram->drawNumber(h->value,Histogram_width, 240-high-30);    //Show high(value) of cylinder 
     tft_Histogram->drawFloat(h->value,1 ,Histogram_width, 240-high-30);
-    tft_Histogram->drawString(h->lable,Histogram_width,222);             //文本字符串
-    tft_Histogram->setRotation(2);                                       //还原参考原点
+    tft_Histogram->drawString(h->lable,Histogram_width,222);             //Show Text string
+    tft_Histogram->setRotation(2);                                       //Reset reference origin
 
     
-    Histogram_width=Histogram_width+width_P+10;                  //记录总宽度
+    Histogram_width=Histogram_width+width_P+10;                  //Record total width
     h=h->next;
   }
 }
@@ -426,21 +426,21 @@ void TFT_Histogram::groupCylinder(int Cylinder_Number)
       if(high<2) high=2;
       if(width_P<8) width_P=8;
 
-      tft_Histogram->drawRect(20,Histogram_width,high,width_P, h->colour);//打印柱形
-      tft_Histogram->fillRect(20,Histogram_width,high,width_P, h->colour);//填充颜色
+      tft_Histogram->drawRect(20,Histogram_width,high,width_P, h->colour);//show cylinder
+      tft_Histogram->fillRect(20,Histogram_width,high,width_P, h->colour);//fill color
   
-      tft_Histogram->setRotation(3);                                       //设置文字或数字打印参考原点
+      tft_Histogram->setRotation(3);                                       //Set text size and digital print reference origin
       tft_Histogram->setTextSize(1);
-  //  tft_Histogram->drawNumber(h->value,Histogram_width, 240-high-30);    //显示值（高度）
+  //  tft_Histogram->drawNumber(h->value,Histogram_width, 240-high-30);    //Show high(value) of cylinder 
       tft_Histogram->drawFloat(h->value,1 ,Histogram_width, 240-high-30);
-      tft_Histogram->drawString(h->lable,Histogram_width,222);             //文本字符串
+      tft_Histogram->drawString(h->lable,Histogram_width,222);             //Show Text string
       tft_Histogram->setRotation(2);  
       
-      Histogram_width=Histogram_width+width_P;//还原参考原点
+      Histogram_width=Histogram_width+width_P;//Reset reference origin
       h=h->next;
     }
     if(Histogram_width>300-width_P) break;
-    Histogram_width=Histogram_width+10;                  //记录总宽度
+    Histogram_width=Histogram_width+10;                  //Record total width
   }
 
 }
@@ -449,7 +449,7 @@ void TFT_Histogram::groupCylinder(int Cylinder_Number)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //The function is to show a line chart.                                                                                                                //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void TFT_Histogram::lineChat(int colour)
+void TFT_Histogram::lineChart(int colour)
 {
   this->histogramInit(tft_Histogram);
   struct Histogram_param *h=head->next;
@@ -476,19 +476,19 @@ void TFT_Histogram::lineChat(int colour)
     if(high<2) high=2;
     if(width_P<8) width_P=8;
     
-    tft_Histogram->drawRect(20,Histogram_width,high,width_P, h->colour);//打印柱形
-    tft_Histogram->fillRect(20,Histogram_width,high,width_P, h->colour);//填充颜色
+    tft_Histogram->drawRect(20,Histogram_width,high,width_P, h->colour);//show cylinder
+    tft_Histogram->fillRect(20,Histogram_width,high,width_P, h->colour);//fill color
 
-    tft_Histogram->setRotation(3);                                       //设置文字或数字打印参考原点
+    tft_Histogram->setRotation(3);                                       //Set text size and digital print reference origin
     tft_Histogram->setTextSize(1);
-//  tft_Histogram->drawNumber(h->value,Histogram_width, 240-high-30);    //显示值（高度）
+//  tft_Histogram->drawNumber(h->value,Histogram_width, 240-high-30);    //Show high(value) of cylinder 
     tft_Histogram->drawFloat(h->value,1 ,Histogram_width, 240-high-30);
-    tft_Histogram->drawString(h->lable,Histogram_width,222);             //文本字符串
-    tft_Histogram->setRotation(2);                                       //还原参考原点
-    tft_Histogram->drawLine(x,y,21+high,Histogram_width,colour);        //to draw line chat
+    tft_Histogram->drawString(h->lable,Histogram_width,222);             //Show Text string
+    tft_Histogram->setRotation(2);                                       //Reset reference origin
+    tft_Histogram->drawLine(x,y,21+high,Histogram_width,colour);        //to draw line chart
     x=21+high;
     y=Histogram_width;
-    Histogram_width=Histogram_width+width_P+10;                  //记录总宽度
+    Histogram_width=Histogram_width+width_P+10;                  //Record total width
     h=h->next;
   }
 
@@ -498,7 +498,7 @@ void TFT_Histogram::lineChat(int colour)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //The function is to show a line chart.                                                                                                                //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void TFT_Histogram::lineChat(int Cylinder_Number,int colour)
+void TFT_Histogram::lineChart(int Cylinder_Number,int colour)
 {
   this->histogramInit(tft_Histogram);
   struct Histogram_param *h=head->next;
@@ -527,24 +527,24 @@ void TFT_Histogram::lineChat(int Cylinder_Number,int colour)
       if(high<2) high=2;
       if(width_P<8) width_P=8;
 
-      tft_Histogram->drawRect(20,Histogram_width,high,width_P, h->colour);//打印柱形
-      tft_Histogram->fillRect(20,Histogram_width,high,width_P, h->colour);//填充颜色
+      tft_Histogram->drawRect(20,Histogram_width,high,width_P, h->colour);//show cylinder
+      tft_Histogram->fillRect(20,Histogram_width,high,width_P, h->colour);//fill color
   
-      tft_Histogram->setRotation(3);                                       //设置文字或数字打印参考原点
+      tft_Histogram->setRotation(3);                                       //Set text size and digital print reference origin
       tft_Histogram->setTextSize(1);
-  //  tft_Histogram->drawNumber(h->value,Histogram_width, 240-high-30);    //显示值（高度）
+  //  tft_Histogram->drawNumber(h->value,Histogram_width, 240-high-30);    //Show high(value) of cylinder 
       tft_Histogram->drawFloat(h->value,1 ,Histogram_width, 240-high-30);
-      tft_Histogram->drawString(h->lable,Histogram_width,222);             //文本字符串
+      tft_Histogram->drawString(h->lable,Histogram_width,222);             //Show Text string
       tft_Histogram->setRotation(2);  
       tft_Histogram->drawLine(x,y,21+high,Histogram_width,colour);        //to draw line chat
       x=21+high;
       y=Histogram_width;
       
-      Histogram_width=Histogram_width+width_P;//还原参考原点
+      Histogram_width=Histogram_width+width_P;//Reset reference origin
       h=h->next;
     }
     if(Histogram_width>300-width_P) break;
-    Histogram_width=Histogram_width+10;                  //记录总宽度
+    Histogram_width=Histogram_width+10;                  //Record total width
   }
 
 }

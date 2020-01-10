@@ -29,8 +29,8 @@ class TFT_Histogram
         void notShowtext(int NO);                                                                           //The function is not show text of a cylinder on screen
         void deleteCylinder(int NO);                                                                       //The function is delete a cylinder 
         void groupCylinder(int Cylinder_Number);                                                          //The function is to group these cylinders.
-        void lineChat(int colour);                                                                       // The function is to show a line chart. 
-        void lineChat(int Cylinder_Number,int colour);                                                  // The function is to show a line chart. 
+        void lineChart(int colour);                                                                       // The function is to show a line chart. 
+        void lineChart(int Cylinder_Number,int colour);                                                  // The function is to show a line chart. 
 //        void histogramShowMany();
 
   private:
