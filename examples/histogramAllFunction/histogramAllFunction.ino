@@ -11,38 +11,38 @@ TFT_eSPI tft = TFT_eSPI();
     
 void setup(void) {
   tft.init();                  
-  histogram.histogramInit(&tft);                                             //Initialize histogram 
-  histogram.histogramForm("a",1,50.55,40,TFT_RED);                          //Input lable,NO,value(high),width,colour
-  histogram.histogramForm("b",2,20,40,TFT_RED);
-  histogram.histogramForm("c",3,100,50,TFT_RED);
-  histogram.histogramForm("d",4,53,50,TFT_RED);
-  histogram.histogramForm("e",5,133,30,TFT_RED);                        //Initialize histogram 
-  histogram.histogramForm("f",6,53,50,TFT_RED);
-  histogram.histogramForm("g",7,80,50,TFT_RED);
+  histogram.initHistogram(&tft);                                             //Initialize histogram 
+  histogram.formHistogram("a",1,50.55,40,TFT_RED);                          //Input lable,NO,value(high),width,colour
+  histogram.formHistogram("b",2,20,40,TFT_RED);
+  histogram.formHistogram("c",3,100,50,TFT_RED);
+  histogram.formHistogram("d",4,53,50,TFT_RED);
+  histogram.formHistogram("e",5,133,30,TFT_RED);                        //Initialize histogram 
+  histogram.formHistogram("f",6,53,50,TFT_RED);
+  histogram.formHistogram("g",7,80,50,TFT_RED);
 
 
-  histogram.histogramShow();                                                                   //The function is show  the histogram  on screen
+  histogram.showHistogram();                                                                   //The function is show  the histogram  on screen
   delay(3000);
   histogram.changeParam(6,"F",53,50,TFT_RED);                                                //The function is change these parameter of the histogram
   histogram.deleteCylinder(7);                                                              //The function is delete a cylinder 
 }
 
 void loop() {
-  histogram.histogramShow();
+  histogram.showHistogram();
   delay(2000);
   histogram.setTextSizeColourHistogram(1,2,TFT_BLACK,TFT_GREEN,TFT_WHITE);            //The function is set size of text of the histogram  and the background of screen
   delay(2000);
   showSeeed(TFT_BLUE);                                                              //Show some chars
   delay(2000);
-  histogram.histogramShrinkShow(50,60,3);                                         //The function is show histogram more little
+  histogram.shrinkShowHistogram(50,60,3);                                         //The function is show histogram more little
   delay(2000);
-  histogram.histogramShrinkShow(130,180,2);                                     //The function is show histogram more little
+  histogram.shrinkShowHistogram(130,180,2);                                     //The function is show histogram more little
   delay(2000);
   showSeeed(TFT_GREEN);
   delay(2000);
   histogram.notShowCylinder(5);                                             //The function is not show a cylindricity of the histogram  on screen
   delay(10);
-  histogram.histogramShow();
+  histogram.showHistogram();
   delay(2000);
   histogram.notShowAxis();                                              //The function is not show axes on screen
   delay(2000);

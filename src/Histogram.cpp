@@ -9,34 +9,42 @@ TFT_Histogram::TFT_Histogram()
   rear=head;
   rear->next=NULL;
 }
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//Initialize                                                                                                                                           //
+//Draw arrow of x,y axis                                                                                                                               //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void TFT_Histogram::histogramInit(TFT_eSPI* tft)
+void TFT_Histogram::drawArrow()
 {
-  tft_Histogram = tft;
-  tft_Histogram->fillScreen(TFT_WHITE);                   //Fill the screen with white
-  tft_Histogram->setRotation(2);                         //The origin is in the lower left corner facing the usb port
   tft_Histogram->drawFastHLine(20,20,200,TFT_BLACK);    //It is x axis facing usb port
   tft_Histogram->drawFastVLine(20,20,280,TFT_BLACK);   //It is y axis facing usb port
-
-  //Draw arrow of x,y axis
   tft_Histogram->drawLine(10,290,20,300,TFT_BLACK);
   tft_Histogram->drawLine(30,290,20,300,TFT_BLACK);
   tft_Histogram->drawLine(210,10,220,20,TFT_BLACK);
   tft_Histogram->drawLine(210,30,220,20,TFT_BLACK);
+}
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Initialize                                                                                                                                           //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void TFT_Histogram::initHistogram(TFT_eSPI* tft)
+{
+  tft_Histogram = tft;
+  tft_Histogram->fillScreen(TFT_WHITE);                   //Fill the screen with white
+  tft_Histogram->setRotation(2);                         //The origin is in the lower left corner facing the usb port
+  //Draw arrow of x,y axis
+  this->drawArrow();
 
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //The function is record some datas of cylindricity                                                                                                    //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void TFT_Histogram::histogramForm(String lable,int NO,double Histogram_value,int Histogram_WIDTH,uint32_t  colour)
+void TFT_Histogram::formHistogram(String lable,int NO,double Histogram_value,int Histogram_WIDTH,uint32_t  colour)
 { 
   if(number>8) return;
   struct Histogram_param *p;
   p=(struct Histogram_param *)malloc(sizeof(struct Histogram_param ));
+  if(p==NULL) return;
   p->NO=NO;
   p->wide=Histogram_WIDTH;
   p->value=Histogram_value;
@@ -45,7 +53,7 @@ void TFT_Histogram::histogramForm(String lable,int NO,double Histogram_value,int
   rear->next=p;
   rear=p;
   rear->next=NULL;
-   number++;
+  number++;
 }
 
 
@@ -56,11 +64,11 @@ void TFT_Histogram::compare()
 {
   struct Histogram_param *p=head->next;
   
-  Histogram_max=Histogram_min=p->value;
+  histogramMax=histogramMin=p->value;
   p=p->next;
   while(p!=NULL){
-    if((p->value)>Histogram_max) Histogram_max=p->value;
-    if((p->value)<Histogram_min) Histogram_min=p->value;
+    if((p->value)>histogramMax) histogramMax=p->value;
+    if((p->value)<histogramMin) histogramMin=p->value;
     p=p->next;
   }
 
@@ -76,9 +84,9 @@ void TFT_Histogram::compare()
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //The function is show  the histogram  on screen                                                                                                       //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void TFT_Histogram::histogramShow()
+void TFT_Histogram::showHistogram()
 { 
-  this->histogramInit(tft_Histogram);
+  this->initHistogram(tft_Histogram);
   struct Histogram_param *h=head->next;
   double high=0,width_P=0;
   Histogram_width=30;
@@ -88,8 +96,8 @@ void TFT_Histogram::histogramShow()
 
   while(h!=NULL)
   {
-    if(NotShow==h->NO){NotShow=0;h=h->next; continue;}
-    high=h->value*180/Histogram_max;                                 //Calculate the ratio of height value
+    if(notShow==h->NO){notShow=0;h=h->next; continue;}
+    high=h->value*180/histogramMax;                                 //Calculate the ratio of height value
 
     if(number>=4)
       {
@@ -125,9 +133,9 @@ void TFT_Histogram::histogramShow()
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //The function is show  many cylinders on screen                                                                                                       //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*void TFT_Histogram::histogramShowMany()
+/*void TFT_Histogram::showHistogramMany()
 { 
-  this->histogramInit(tft_Histogram);
+  this->initHistogram(tft_Histogram);
   struct Histogram_param *h=head->next;
   int high=0,width_P=1;
   Histogram_width=22;
@@ -135,7 +143,7 @@ void TFT_Histogram::histogramShow()
 
   while(h!=NULL)
   {
-    high=h->value*180/Histogram_max;                                 //Calculate the ratio of height value
+    high=h->value*180/histogramMax;                                 //Calculate the ratio of height value
 
     if(Histogram_width>300-width_P) break;
     if(high<2) high=2;
@@ -152,7 +160,7 @@ void TFT_Histogram::histogramShow()
 }
 */
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//The function is set size of text of the histogram  and the background of screen                                                                    ///
+//The function is to set size of text of the histogram  and the background of screen                                                                    ///
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void TFT_Histogram::setTextSizeColourHistogram(int lableSize,int valueSize,int textColour,int textBackgroundColour,int background)
 {
@@ -162,19 +170,14 @@ void TFT_Histogram::setTextSizeColourHistogram(int lableSize,int valueSize,int t
   this->compare();
   tft_Histogram->fillScreen(background);
   tft_Histogram->setRotation(2);                         //The origin is in the lower left corner facing the usb port
-  tft_Histogram->drawFastHLine(20,20,200,TFT_BLACK);    //It is x axis facing usb port
-  tft_Histogram->drawFastVLine(20,20,280,TFT_BLACK);   //It is y axis facing usb port
 
   //Draw arrow of x,y axis
-  tft_Histogram->drawLine(10,290,20,300,TFT_BLACK);
-  tft_Histogram->drawLine(30,290,20,300,TFT_BLACK);
-  tft_Histogram->drawLine(210,10,220,20,TFT_BLACK);
-  tft_Histogram->drawLine(210,30,220,20,TFT_BLACK);
+  this->drawArrow();
   
   while(h!=NULL)
   {
-    if(NotShow==h->NO){NotShow=0;h=h->next; continue;}
-    high=h->value*180/Histogram_max;                                 //Calculate the ratio of height value
+    if(notShow==h->NO){notShow=0;h=h->next; continue;}
+    high=h->value*180/histogramMax;                                 //Calculate the ratio of height value
 
     if(number>=4)
       {
@@ -214,7 +217,7 @@ void TFT_Histogram::setTextSizeColourHistogram(int lableSize,int valueSize,int t
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //The function is show histogram more little                                                                                             //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void TFT_Histogram::histogramShrinkShow(int x,int y,int shrinkMultiple)
+void TFT_Histogram::shrinkShowHistogram(int x,int y,int shrinkMultiple)
 { 
   Histogram_width=y+2;
   tft_Histogram->fillScreen(TFT_WHITE);                   //Fill the screen with white
@@ -235,8 +238,8 @@ void TFT_Histogram::histogramShrinkShow(int x,int y,int shrinkMultiple)
 
   while(h!=NULL)
   {
-    if(NotShow==h->NO){NotShow=0;h=h->next; continue;}
-    high=h->value*180/Histogram_max/shrinkMultiple;                                 //Calculate the ratio of height value
+    if(notShow==h->NO){notShow=0;h=h->next; continue;}
+    high=h->value*180/histogramMax/shrinkMultiple;                                 //Calculate the ratio of height value
 
     if(number>=4)
       {
@@ -271,7 +274,7 @@ void TFT_Histogram::histogramShrinkShow(int x,int y,int shrinkMultiple)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void TFT_Histogram::notShowCylinder(int NO)
 {
-  NotShow=NO;
+  notShow=NO;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -303,8 +306,8 @@ void TFT_Histogram::notShowAxis()
 
   while(h!=NULL)
   {
-    if(NotShow==h->NO){NotShow=0;h=h->next; continue;}
-    high=h->value*180/Histogram_max;                                 //Calculate the ratio of height value
+    if(notShow==h->NO){notShow=0;h=h->next; continue;}
+    high=h->value*180/histogramMax;                                 //Calculate the ratio of height value
 
     if(number>=4)
       {
@@ -339,7 +342,7 @@ void TFT_Histogram::notShowAxis()
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void TFT_Histogram::notShowtext(int NO)
 { 
-  this->histogramInit(tft_Histogram);
+  this->initHistogram(tft_Histogram);
   struct Histogram_param *h=head->next;
   int high=0,width_P=0;
   Histogram_width=30;
@@ -349,8 +352,8 @@ void TFT_Histogram::notShowtext(int NO)
 
   while(h!=NULL)
   {
-    if(NotShow==h->NO){NotShow=0;h=h->next; continue;}
-    high=h->value*180/Histogram_max;                                 //Calculate the ratio of height value
+    if(notShow==h->NO){notShow=0;h=h->next; continue;}
+    high=h->value*180/histogramMax;                                 //Calculate the ratio of height value
 
     if(number>=4)
       {
@@ -400,7 +403,7 @@ void TFT_Histogram::changeParam(int NO,String lable,double Histogram_value,int H
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void TFT_Histogram::groupCylinder(int Cylinder_Number)
 {
-  this->histogramInit(tft_Histogram);
+  this->initHistogram(tft_Histogram);
   struct Histogram_param *h=head->next;
   double high=0,width_P=0;
   Histogram_width=30;
@@ -410,10 +413,10 @@ void TFT_Histogram::groupCylinder(int Cylinder_Number)
 
   while(h!=NULL)
   {
-    if(NotShow==h->NO){NotShow=0;h=h->next; continue;}
+    if(notShow==h->NO){notShow=0;h=h->next; continue;}
     for(int i=1;i<=Cylinder_Number;i++)
     {
-      high=h->value*180/Histogram_max;                                 //Calculate the ratio of height value  
+      high=h->value*180/histogramMax;                                 //Calculate the ratio of height value  
       if(number>=4)
         {
           width_P=h->wide*(280-number*10-10)/Histogram_sum_wide;      //Calculate the ratio of width value
@@ -451,7 +454,7 @@ void TFT_Histogram::groupCylinder(int Cylinder_Number)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void TFT_Histogram::lineChart(int colour)
 {
-  this->histogramInit(tft_Histogram);
+  this->initHistogram(tft_Histogram);
   struct Histogram_param *h=head->next;
   double high=0,width_P=0;
   Histogram_width=30;
@@ -461,8 +464,8 @@ void TFT_Histogram::lineChart(int colour)
   int x=20,y=20;
   while(h!=NULL)
   {
-    if(NotShow==h->NO){NotShow=0;h=h->next; continue;}
-    high=h->value*180/Histogram_max;                                 //Calculate the ratio of height value
+    if(notShow==h->NO){notShow=0;h=h->next; continue;}
+    high=h->value*180/histogramMax;                                 //Calculate the ratio of height value
 
     if(number>=4)
       {
@@ -500,7 +503,7 @@ void TFT_Histogram::lineChart(int colour)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void TFT_Histogram::lineChart(int Cylinder_Number,int colour)
 {
-  this->histogramInit(tft_Histogram);
+  this->initHistogram(tft_Histogram);
   struct Histogram_param *h=head->next;
   double high=0,width_P=0;
   Histogram_width=30;
@@ -511,10 +514,10 @@ void TFT_Histogram::lineChart(int Cylinder_Number,int colour)
 
   while(h!=NULL)
   {
-    if(NotShow==h->NO){NotShow=0;h=h->next; continue;}
+    if(notShow==h->NO){notShow=0;h=h->next; continue;}
     for(int i=1;i<=Cylinder_Number;i++)
     {
-      high=h->value*180/Histogram_max;                                 //Calculate the ratio of height value  
+      high=h->value*180/histogramMax;                                 //Calculate the ratio of height value  
       if(number>=4)
         {
           width_P=h->wide*(280-number*10-10)/Histogram_sum_wide;      //Calculate the ratio of width value

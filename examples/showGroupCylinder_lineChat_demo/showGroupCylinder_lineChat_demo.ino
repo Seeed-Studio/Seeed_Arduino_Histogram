@@ -7,17 +7,17 @@ TFT_eSPI tft = TFT_eSPI();
 void setup() {
 
   tft.init();                  
-  histogram.histogramInit(&tft);                                             //Initialize histogram 
-  histogram.histogramForm("A",1,530.55,40,TFT_RED);                          //Input lable,NO,value(high),width,colour
-  histogram.histogramForm("B",2,120,40,TFT_BLACK);
-  histogram.histogramForm("C",3,240,40,TFT_GREEN);
-  histogram.histogramForm("D",4,210,40,TFT_BLUE);
-  histogram.histogramForm("E",5,320,40,TFT_YELLOW);
+  histogram.initHistogram(&tft);                                             //Initialize histogram 
+  histogram.formHistogram("A",1,530.55,40,TFT_RED);                          //Input lable,NO,value(high),width,colour
+  histogram.formHistogram("B",2,120,40,TFT_BLACK);
+  histogram.formHistogram("C",3,240,40,TFT_GREEN);
+  histogram.formHistogram("D",4,210,40,TFT_BLUE);
+  histogram.formHistogram("E",5,320,40,TFT_YELLOW);
 
 }
 
 void loop() {
-  histogram.histogramShow();
+  histogram.showHistogram();
   delay(2000); 
   histogram.groupCylinder(1);                                     //The function is to group these cylinders.
   delay(2000);
