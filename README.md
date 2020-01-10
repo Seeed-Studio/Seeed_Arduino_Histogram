@@ -6,9 +6,7 @@ Introduction
 Usage
 ------------------------------------------------------------
     1.Git clone this repository to your Arduino IDE's libraries directory.
-     <br>
     2.Run the demo about histogram on examples directory.
-    <br>
     This software is written for seeed studio and is licensed under The MIT License. Check License.txt for more information.
 -
     Contributing to this software is warmly welcomed. You can do this basically by
