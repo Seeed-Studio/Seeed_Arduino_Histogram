@@ -2,11 +2,11 @@ Seeed_Arduino_HISTOGRAM
 ============================================================
 Introduction
 ---
-An Arduino library for display multi - function histogram on screen.
+  An Arduino library for display multi - function histogram on screen.
 <br> 
 Usage
 ---
-1.Git clone this repository to your Arduino IDE's libraries directory.
+1.Git clone this repository to your Arduino IDE's libraries directory.<br>
 2.Run the demo about histogram on examples directory.<br>
 This software is written for seeed studio and is licensed under The MIT License. Check License.txt for more information.
 -
