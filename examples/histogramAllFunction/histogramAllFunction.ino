@@ -1,3 +1,4 @@
+
 /*
   All functions of histogram
 */
@@ -13,17 +14,16 @@ void setup(void) {
   tft.init();                  
   histogram.initHistogram(&tft);                                             //Initialize histogram 
   histogram.formHistogram("a",1,50.55,40,TFT_RED);                          //Input lable,NO,value(high),width,colour
-  histogram.formHistogram("b",2,20,40,TFT_RED);
-  histogram.formHistogram("c",3,100,50,TFT_RED);
-  histogram.formHistogram("d",4,53,50,TFT_RED);
-  histogram.formHistogram("e",5,133,30,TFT_RED);                        //Initialize histogram 
-  histogram.formHistogram("f",6,53,50,TFT_RED);
-  histogram.formHistogram("g",7,80,50,TFT_RED);
-
+  histogram.formHistogram("b",2,20,40,TFT_BLACK);
+  histogram.formHistogram("c",3,100,50,TFT_GREEN);
+  histogram.formHistogram("d",4,53,50,TFT_BLUE);
+  histogram.formHistogram("e",5,133,30,TFT_YELLOW);                        //Initialize histogram 
+  histogram.formHistogram("f",6,53,50,TFT_ORANGE);
+  histogram.formHistogram("g",7,80,50,TFT_PINK);
 
   histogram.showHistogram();                                                                   //The function is show  the histogram  on screen
   delay(3000);
-  histogram.changeParam(6,"F",53,50,TFT_RED);                                                //The function is change these parameter of the histogram
+  histogram.changeParam(6,"F",55,50,TFT_PINK);                                                //The function is change these parameter of the histogram
   histogram.deleteCylinder(7);                                                              //The function is delete a cylinder 
 }
 
@@ -40,7 +40,7 @@ void loop() {
   delay(2000);
   showSeeed(TFT_GREEN);
   delay(2000);
-  histogram.notShowCylinder(5);                                             //The function is not show a cylindricity of the histogram  on screen
+  histogram.notShowCylinder(3);                                             //The function is not show a cylindricity of the histogram  on screen
   delay(10);
   histogram.showHistogram();
   delay(2000);
@@ -54,8 +54,7 @@ void loop() {
   delay(2000);
   histogram.lineChart(TFT_BLACK);                                // The function is to show a line chart. 
   delay(2000);
-  histogram.lineChart(2,TFT_BLACK);                            // The function is to show a line chart. 
-  delay(2000);
+
   showSeeed(TFT_ORANGE);
   delay(2000);
 }

@@ -54,7 +54,7 @@ void TFT_Histogram::initHistogram(TFT_eSPI* tft)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void TFT_Histogram::formHistogram(String lable,uint8_t NO,float Histogram_value,uint16_t Histogram_WIDTH,uint32_t  colour)
 { 
-  if(number>10) return;
+  if(number>8) return;
   struct Histogram_param *p;
   p=(struct Histogram_param *)malloc(sizeof(struct Histogram_param ));
   if(p==NULL) return;

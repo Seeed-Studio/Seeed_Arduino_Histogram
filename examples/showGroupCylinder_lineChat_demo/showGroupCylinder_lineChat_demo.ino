@@ -13,7 +13,7 @@ void setup() {
   histogram.formHistogram("C",3,240,40,TFT_GREEN);
   histogram.formHistogram("D",4,210,40,TFT_BLUE);
   histogram.formHistogram("E",5,320,40,TFT_YELLOW);
-
+    
 }
 
 void loop() {
