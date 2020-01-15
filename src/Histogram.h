@@ -35,6 +35,7 @@ class TFT_Histogram
         void showOne();                                                                                  //Show a cylinder
         void showText();                                                                                //Display text
         void compare();                                                                                //to abtain the maximum value and  and minimum value
+        void showChangeHistogram();
   private:
        TFT_eSPI* tft_Histogram; 
        uint8_t notShow=0;                                                                           //this value is let a cylinder not showing on screen 
@@ -47,4 +48,5 @@ class TFT_Histogram
        struct Histogram_param *head,*rear;                                                   //this's a linked list of pointer of head and rear
        struct Histogram_param *h=NULL;
        uint8_t limitWidth=0;                                                               //A flag of width
+       uint16_t changeNOFlag=9999;
 };
