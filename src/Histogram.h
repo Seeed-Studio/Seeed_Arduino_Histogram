@@ -23,7 +23,7 @@ class TFT_Histogram
         void setTextSizeColourHistogram(uint8_t lableSize,float valueSize,uint32_t textColour,uint32_t textBackgroundColour,uint32_t background);            //The function is set size of text of the histogram  and the background of screen 
         void shrinkShowHistogram(uint16_t x,uint16_t y,uint8_t shrinkMultiple);                                     //The function is show histogram more little
         void notShowCylinder(uint8_t NO);                                                                          //The function is not show a cylindricity of the histogram  on screen
-        void changeParam(uint8_t NO,String lable,float Histogram_value,uint16_t Histogram_WIDTH,uint32_t  colour);//The function is change these parameter of the histogram
+        void changeParam(uint8_t NO,String lable,float Histogram_value,uint32_t  colour);//The function is change these parameter of the histogram
         void notShowAxis();                                                                                      //The function is not show axes on screen
         void notShowtext(uint8_t NO);                                                                           //The function is not show text of a cylinder on screen
         void deleteCylinder(uint8_t NO);                                                                       //The function is delete a cylinder 
@@ -35,6 +35,8 @@ class TFT_Histogram
         void showOne();                                                                                  //Show a cylinder
         void showText();                                                                                //Display text
         void compare();                                                                                //to abtain the maximum value and  and minimum value
+        void ShowAxis();                                                                              //The function is not show axes on screen
+        void changeWidth(uint8_t NO,uint16_t Histogram_WIDTH);                                       //The function is to change width of cylinder
   private:
        TFT_eSPI* tft_Histogram; 
        uint8_t notShow=0;                                                                           //this value is let a cylinder not showing on screen 
@@ -47,5 +49,5 @@ class TFT_Histogram
        struct Histogram_param *head,*rear;                                                   //this's a linked list of pointer of head and rear
        struct Histogram_param *h=NULL;
        uint8_t limitWidth=0;                                                               //A flag of width
-       uint16_t changeNOFlag=9999;
+//       uint16_t changeNOFlag=9999;
 };

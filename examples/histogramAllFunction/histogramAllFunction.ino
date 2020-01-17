@@ -23,7 +23,7 @@ void setup(void) {
 
   histogram.showHistogram();                                                                   //The function is show  the histogram  on screen
   delay(3000);
-  histogram.changeParam(6,"F",55,50,TFT_PINK);                                                //The function is change these parameter of the histogram
+  histogram.changeParam(6,"F",56,TFT_PINK);                                                //The function is change these parameter of the histogram
   histogram.deleteCylinder(7);                                                              //The function is delete a cylinder 
 }
 

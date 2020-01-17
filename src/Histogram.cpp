@@ -284,6 +284,18 @@ void TFT_Histogram::notShowAxis()
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//The function is show axes on screen                                                                                                                  //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void TFT_Histogram::ShowAxis()
+{
+  tft_Histogram->drawFastHLine(20,20,200,TFT_BLACK);    //It is x axis facing usb port
+  tft_Histogram->drawFastVLine(20,20,280,TFT_BLACK);   //It is y axis facing usb port
+  tft_Histogram->drawLine(10,290,20,300,TFT_BLACK);
+  tft_Histogram->drawLine(30,290,20,300,TFT_BLACK);
+  tft_Histogram->drawLine(210,10,220,20,TFT_BLACK);
+  tft_Histogram->drawLine(210,30,220,20,TFT_BLACK);
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //The function is not show text of a cylinder on screen                                                                                                //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void TFT_Histogram::notShowtext(uint8_t NO)
@@ -306,84 +318,74 @@ void TFT_Histogram::notShowtext(uint8_t NO)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //The function is change these parameter of the histogram                                                                                              //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void TFT_Histogram::changeParam(uint8_t NO,String lable,float Histogram_value,uint16_t Histogram_WIDTH,uint32_t  colour)
+void TFT_Histogram::changeParam(uint8_t NO,String lable,float Histogram_value,uint32_t  colour)
 {
-  if(NO<0 || NO>255 || Histogram_WIDTH>280) return;
+  if(NO<0 || NO>255) return;
   struct Histogram_param * p=head->next,*q;
   while(p!=NULL&&p->NO!=NO){
     p=p->next;
   }
-  changeNOFlag=NO;
   q=(struct Histogram_param *)malloc(sizeof(struct Histogram_param ));
   q->lable=p->lable;
   q->value=p->value;
   q->wide=p->wide;
   q->colour=TFT_WHITE;
-
   high=0;
   width_P=0;
   Histogram_width=30;
   this->compare();
   h=head->next;
-  float high_=0,width_P_=0; 
-  int Histogram_width_=Histogram_width;
+  int high_=0,width_P_=0; 
+  static int i=0;
   while(h!=NULL)
   {
     if(h->NO==NO)
      {
-      high_=q->value*180/histogramMax;                                 //Calculate the ratio of height value
+      high_=p->value*180/histogramMax;                                 //Calculate the ratio of height value
       if(number>=4)
         {
-          width_P_=q->wide*(280-number*10-10)/Histogram_sum_wide;      //Calculate the ratio of width value
+          width_P_=p->wide*(280-number*10-10)/Histogram_sum_wide;      //Calculate the ratio of width value
         }
       else
         {
-          width_P_=q->wide*(280-150)/Histogram_sum_wide;           
+          width_P_=p->wide*(280-150)/Histogram_sum_wide;           
         }
       if(high_<3) high_=3;
       if(width_P_<8) width_P_=8;
-      tft_Histogram->fillRect(21,Histogram_width,high_+10,width_P_, q->colour);
-      tft_Histogram->fillRect(4,Histogram_width,15,width_P_, q->colour);
-
-    p->lable=lable;
-    p->value=Histogram_value;
-    p->wide=Histogram_WIDTH;
-    p->colour=colour;
-    this->compare();
-    high=p->value*180/histogramMax;                                 //Calculate the ratio of height value
-    if(number>=4)
+      tft_Histogram->fillRect(21,Histogram_width,high_+10,width_P_,TFT_WHITE);
+      tft_Histogram->fillRect(4,Histogram_width,15,width_P_,TFT_WHITE);
+       Serial.println(width_P_);
+      p->lable=lable;
+      p->value=Histogram_value;
+      p->colour=colour;
+      this->compare();
+      high=p->value*180/histogramMax;                                 //Calculate the ratio of height value
+      if(number>=4)
+        {
+          width_P=p->wide*(280-number*10-10)/Histogram_sum_wide;      //Calculate the ratio of width value
+        }
+      else
+        {
+          width_P=p->wide*(280-150)/Histogram_sum_wide;           
+        }
+      if(high<3) high=3;
+      if(width_P<8) width_P=8;
+      if(p->value >= histogramMax) this->showHistogram();
+      else
       {
-        width_P=p->wide*(280-number*10-10)/Histogram_sum_wide;      //Calculate the ratio of width value
+        tft_Histogram->fillRect(21,Histogram_width,high,width_P_, p->colour);
       }
-    else
-      {
-        width_P=p->wide*(280-150)/Histogram_sum_wide;           
-      }
-    if(high<3) high=3;
-    if(width_P<8) width_P=8;
-
-    if(p->value >= histogramMax) this->showHistogram();
-    else if(p->wide > q->wide+1)
-    {
-       tft_Histogram->fillRect(21,Histogram_width,high,width_P_+2, p->colour);
-    }
-    else if(p->wide == q->wide+1)
-    {
-       tft_Histogram->fillRect(21,Histogram_width,high,width_P_, p->colour);
-    }
-    else if(p->wide < q->wide+1)
-    {
-       tft_Histogram->fillRect(21,Histogram_width,high,width_P_-2, p->colour);
-    } 
-       tft_Histogram->setRotation(3);
-       tft_Histogram->setTextSize(1);                        //The function is to set size of text 
-       tft_Histogram->setTextColor(TFT_BLACK, TFT_YELLOW); 
-       tft_Histogram->drawFloat(p->value,1 ,Histogram_width, 240-high-30);
-       tft_Histogram->drawString(p->lable,Histogram_width,222);             //Show Text string
-      tft_Histogram->setRotation(2); 
-      tft_Histogram->setTextSize(2);                        //The function is to set size of text 
+    
+    tft_Histogram->setRotation(3);
+    tft_Histogram->setTextSize(1);                        //The function is to set size of text 
+    tft_Histogram->setTextColor(TFT_BLACK, TFT_YELLOW); 
+    tft_Histogram->drawFloat(p->value,1 ,Histogram_width, 240-high-30);
+    tft_Histogram->drawString(p->lable,Histogram_width,222);             //Show Text string
+    tft_Histogram->setRotation(2); 
+    tft_Histogram->setTextSize(2);                        //The function is to set size of text 
+    width_P_=0;
     break;
-    }
+  }
   else
     {
     if(number>=4)
@@ -399,9 +401,23 @@ void TFT_Histogram::changeParam(uint8_t NO,String lable,float Histogram_value,ui
     }
 
     Histogram_width=Histogram_width+width_P+10;                  //Record total width
-    Histogram_width_=Histogram_width;
     h=h->next;
   }
+  free(q);
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//The function is change width of the histogram                                                                                              //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void TFT_Histogram::changeWidth(uint8_t NO,uint16_t Histogram_WIDTH)
+{
+  struct Histogram_param * h=head->next;
+  while(h!=NULL&&h->NO!=NO){
+    h=h->next;
+  }
+
+  h->wide=Histogram_WIDTH;
+  this->showHistogram();
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
