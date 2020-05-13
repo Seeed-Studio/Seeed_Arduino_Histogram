@@ -4,5 +4,5 @@ build:
   script:
     - wget -c https://files.seeedstudio.com/arduino/seeed-arduino-ci.sh
     - chmod +x seeed-arduino-ci.sh
-    - bash $PWD/seeed-arduino-ci.sh test
+    - bash $PWD/seeed-arduino-ci.sh change_text_demo:uno/dontShow_Axis_cylinder_Text:uno/histogramAllFunction:uno/showGroupCylinder_lineChat_demo:uno/shrink_demo:uno
 
