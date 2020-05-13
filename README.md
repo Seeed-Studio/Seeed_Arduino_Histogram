@@ -1,4 +1,4 @@
-Seeed_Arduino_Histogram
+Seeed_Arduino_Histogram[![Build Status](https://travis-ci.com/Seeed-Studio/Seeed_Arduino_Histogram.svg?branch=master)](https://travis-ci.com/Seeed-Studio/Seeed_Arduino_Histogram)
 ============================================================
 Introduction
 ------------------------------------------------------------
