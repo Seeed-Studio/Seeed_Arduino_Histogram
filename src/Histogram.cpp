@@ -52,9 +52,9 @@ void TFT_Histogram::initHistogram(TFT_eSPI* tft)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //The function is record some datas of cylindricity                                                                                                    //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void TFT_Histogram::formHistogram(String lable,uint8_t NO,float Histogram_value,uint16_t Histogram_WIDTH,uint32_t  colour)
+void TFT_Histogram::formHistogram(char* lable,uint8_t NO,float Histogram_value,uint16_t Histogram_WIDTH,uint32_t  colour)
 { 
-  if(number>10) return;
+  if(number>=15) return;
   if(NO<0 || NO>255 || Histogram_WIDTH>280) return;
   struct Histogram_param *p;
   p=(struct Histogram_param *)malloc(sizeof(struct Histogram_param ));
@@ -63,7 +63,7 @@ void TFT_Histogram::formHistogram(String lable,uint8_t NO,float Histogram_value,
   p->wide=Histogram_WIDTH;
   p->value=Histogram_value;
   p->colour=colour;
-  p->lable=lable;
+  strncpy(p->lable, lable, 23);
   rear->next=p;
   rear=p;
   rear->next=NULL;
@@ -319,7 +319,7 @@ void TFT_Histogram::notShowtext(uint8_t NO)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //The function is change these parameter of the histogram                                                                                              //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void TFT_Histogram::changeParam(uint8_t NO,String lable,float Histogram_value,uint32_t  colour)
+void TFT_Histogram::changeParam(uint8_t NO,char* lable,float Histogram_value,uint32_t  colour)
 {
   if(NO<0 || NO>255) return;
   struct Histogram_param * p=head->next,*q;
@@ -327,7 +327,7 @@ void TFT_Histogram::changeParam(uint8_t NO,String lable,float Histogram_value,ui
     p=p->next;
   }
   q=(struct Histogram_param *)malloc(sizeof(struct Histogram_param ));
-  q->lable=p->lable;
+  strncpy(q->lable, p->lable, 23);
   q->value=p->value;
   q->wide=p->wide;
   q->colour=TFT_WHITE;
@@ -355,8 +355,8 @@ void TFT_Histogram::changeParam(uint8_t NO,String lable,float Histogram_value,ui
       if(width_P_<8) width_P_=8;
       tft_Histogram->fillRect(21,Histogram_width,high_+10,width_P_,TFT_WHITE);
       tft_Histogram->fillRect(4,Histogram_width,15,width_P_,TFT_WHITE);
-       Serial.println(width_P_);
-      p->lable=lable;
+      Serial.println(width_P_);
+      strncpy(p->lable, lable, 23);
       p->value=Histogram_value;
       p->colour=colour;
       this->compare();

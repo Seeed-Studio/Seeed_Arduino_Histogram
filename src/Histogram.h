@@ -3,7 +3,7 @@
 #include <SPI.h>
 
 struct Histogram_param{ 
-  String lable;                           //lable
+  char lable[24];                           //lable
   uint8_t    NO;                         //NO
   uint16_t    wide;                     //width
   //int    value;                      //value(high)
@@ -18,12 +18,12 @@ class TFT_Histogram
   public:
         TFT_Histogram();                                                                                                  //destructor     
         void initHistogram(TFT_eSPI* tft);                                                                               //initialization
-        void formHistogram(String lable,uint8_t NO,float Histogram_value,uint16_t Histogram_WIDTH,uint32_t  colour);    //Input parameters about a cylinder  
+        void formHistogram(char *lable,uint8_t NO,float Histogram_value,uint16_t Histogram_WIDTH,uint32_t  colour);    //Input parameters about a cylinder  
         void showHistogram();                                                                                          //The function is show  the histogram  on screen
         void setTextSizeColourHistogram(uint8_t lableSize,float valueSize,uint32_t textColour,uint32_t textBackgroundColour,uint32_t background);            //The function is set size of text of the histogram  and the background of screen 
         void shrinkShowHistogram(uint16_t x,uint16_t y,uint8_t shrinkMultiple);                                     //The function is show histogram more little
         void notShowCylinder(uint8_t NO);                                                                          //The function is not show a cylindricity of the histogram  on screen
-        void changeParam(uint8_t NO,String lable,float Histogram_value,uint32_t  colour);//The function is change these parameter of the histogram
+        void changeParam(uint8_t NO,char *lable,float Histogram_value,uint32_t  colour);//The function is change these parameter of the histogram
         void notShowAxis();                                                                                      //The function is not show axes on screen
         void notShowtext(uint8_t NO);                                                                           //The function is not show text of a cylinder on screen
         void deleteCylinder(uint8_t NO);                                                                       //The function is delete a cylinder 
